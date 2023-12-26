@@ -1,6 +1,6 @@
-package component:simple-run
+package component:simple-run;
 
 /// An example world for the component to target.
 world example {
-    export run: func() -> u32
+    export run: func() -> u32;
 }
