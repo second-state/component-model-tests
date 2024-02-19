@@ -6,7 +6,7 @@
       (export (;0;) "get-environment" (func (result 1)))
     )
   )
-  (import "wasi:cli/environment@0.2.0-rc-2023-12-05" (instance (;0;) (type 0)))
+  (import "wasi:cli/environment" (instance $cli (type 0)))
   (core module $M
     (func (export "run") (result i32)
       i32.const 0)
