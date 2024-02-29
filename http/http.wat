@@ -12,11 +12,13 @@
   ))
 
   (core module $M
-    (func (import "http" "http-get") (param i64) (result i32 i32))
-    (func (import "http" "print") (param i32 i32))
+    (func $g (import "http" "http-get") (param i64) (result i32 i32))
+    (func $p (import "http" "print") (param i32 i32))
 
-    (func (export "run") (param i32) (result i32)
+    (func (export "run") (param i32)
       local.get 0
+      call $g
+      call $p
       )
   )
 
