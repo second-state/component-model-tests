@@ -1,5 +1,5 @@
 (component
-  (import "http" (instance $http
+  (import "wasi:http/test" (instance $http
     (export "http-get" (func (param "index" s64) (result string)))
     (export "print" (func (param "text" string)))
   ))
@@ -15,14 +15,14 @@
     (func $g (import "http" "http-get") (param i64) (result i32 i32))
     (func $p (import "http" "print") (param i32 i32))
 
-    (func (export "run") (param i32)
+    (func (export "run") (param i64)
       local.get 0
       call $g
       call $p
       )
   )
 
-  (core instance $m
+  (core instance $main
     (instantiate $M
       (with "http"
         (instance
@@ -33,9 +33,9 @@
     )
   )
 
-  (func $run (param "a" s32) (result s32)
+  (func $run (param "a" s64)
     (canon lift
-      (core func $m "dup"))
+      (core func $main "run"))
   )
   (export "mdup" (func $run))
 )
