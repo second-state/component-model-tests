@@ -1,6 +1,6 @@
 (component
   (import "wasi:http/test" (instance $http
-    (export "http-get" (func (param "index" s64) (result s32)))
+    (export "http-get" (func (param "index" u64) (result u32)))
     (export "print" (func (param "text" string)))
   ))
 
@@ -33,7 +33,7 @@
     )
   )
 
-  (func $run (param "a" s64)
+  (func $run (param "a" u64)
     (canon lift
       (core func $main "run"))
   )
