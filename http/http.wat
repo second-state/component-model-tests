@@ -37,5 +37,5 @@
     (canon lift
       (core func $main "run"))
   )
-  (export "mdup" (func $run))
+  (export "run" (func $run))
 )
