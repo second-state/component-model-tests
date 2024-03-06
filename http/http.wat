@@ -1,6 +1,6 @@
 (component
   (import "wasi:http/test" (instance $http
-    (export "http-get" (func (param "index" u64) (result u32)))
+    (export "http-get" (func (param "index" u64) (result string)))
     (export "print" (func (param "text" string)))
   ))
 
@@ -12,13 +12,13 @@
   ))
 
   (core module $M
-    (func $g (import "http" "http-get") (param i64) (result i32))
-    (func $p (import "http" "print") (param i32 i32))
+    (func $g (import "http" "http-get") (param i64) (result i64 i64))
+    (func $p (import "http" "print") (param i64 i64))
 
     (func (export "run") (param i64)
       local.get 0
       call $g
-      drop
+      call $p
       )
   )
 
