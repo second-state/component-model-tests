@@ -2,14 +2,21 @@
 
 The component model test suites for wasmedge development.
 
-## Prepare WasmEdge and test
-
-1. build latest wasmedge from source
-2. `cd simple-run && cargo component build`
-3. run `wasmedge --enable-component simple-run/target/wasm32-wasi/debug/simple_run.wasm`
-
-## Build command
+## Build WasmEdge with plugin
 
 ```shell
-cargo component build
+cd /path/to/wasmedge
+mkdir build; cd build
+cmake -DCMAKE_BUILD_TYPE=Debug -DWASMEDGE_PLUGIN_WASI_HTTP=ON -DWASMEDGE_BUILD_TOOLS=ON -GNinja ..
+ninja
+```
+
+## Run example
+
+```shell
+# at /path/to/wasmedge/build
+./tools/wasmedge/wasmedge --enable-component /path/to/component-model-tests/core/core.wasm mdup 100
+
+WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-component \
+  /path/to/component-model-tests/http/http.wasm run 0
 ```
