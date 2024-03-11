@@ -20,3 +20,10 @@ ninja
 WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-component \
   /path/to/component-model-tests/http/http.wasm run 0
 ```
+
+## Limitation
+
+1. At [http](http/) example, the import statement is actually importing a core module, not a component. This is because we haven't let WasmEdge plugin produces a component instance, so workaround here. This leads some problems
+    1. canonical ABI part has no effect
+    2. plugin cannot export proper types
+2. The validation of component is incomplete, there is no guarantee your program with problems can be detected.
