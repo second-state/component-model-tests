@@ -36,4 +36,4 @@ The file defines a component, where have
 3. Canonical lift a core function `dup` from instance `m` to be a component function
 4. Export the component function
 
-When one executes the component (refers https://github.com/second-state/component-model-tests/tree/main/docker), result `mdup x = 2 * x`.
+When one executes the component (refers [docker](../docker#run-the-core-component-model-demo), result `mdup x = 2 * x`.
