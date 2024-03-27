@@ -23,13 +23,14 @@ WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-comp
 
 ## Limitation
 
-1. At [http](http/) example, the import statement is actually importing a core module, not a component. This is because we haven't let WasmEdge plugin produces a component instance, we have some workarounds here. This leads some problems
-    1. canonical ABI part has no effect
-    2. plugin cannot export proper types
+1. canonical ABI haven't get implemented
+2. plugin cannot export proper types yet
 2. The validation of component is incomplete, there is no guarantee your program with problems can be detected.
 
 ## Next step
 
-1. We are going to implement canonical ABI first, this will need data conversion which rely on `memory` and `reallocate` options in canonical lift/lowering.
-2. Implement validation about types.
-3. Let WasmEdge plugin produces component instance, then we can start implementing preview2.
+- [x] Let WasmEdge plugin produces component instance.
+- [ ] We are going to implement canonical ABI first, this will need data conversion which rely on `memory` and `reallocate` options in canonical lift/lowering.
+- [ ] implements resource
+- [ ] wasi preview2
+- [ ] Implement validation about types.
