@@ -6,6 +6,10 @@
 # compile wat to wasm
 wasm-tools parse http.wat -o http.wasm
 ```
+
+## Memory
+
+Refers https://github.com/bytecodealliance/wasmtime/blob/main/crates/component-util/src/lib.rs for memory trick.
  
 ## Explanation
 
