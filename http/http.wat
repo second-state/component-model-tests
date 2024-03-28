@@ -1,7 +1,7 @@
 (component
   ;; memory stuff
   (core module $Libc
-    (memory (export "memory") 1)
+    (memory (export "mem") 1)
     (global $last (mut i32) (i32.const 8))
     (func $realloc (export "realloc")
         (param $old_ptr i32)
@@ -110,7 +110,7 @@
   ))
 
   (core module $M
-    (import "libc" "memory" (memory 1))
+    (import "libc" "mem" (memory 1))
     (import "libc" "realloc" (func (param i32 i32 i32 i32) (result i32)))
     (func $g (import "http" "http-get") (param i64) (result i64 i64))
     (func $p (import "http" "print") (param i64 i64))
