@@ -112,13 +112,13 @@
   (core module $M
     (import "libc" "mem" (memory 1))
     (import "libc" "realloc" (func (param i32 i32 i32 i32) (result i32)))
-    (func $g (import "http" "http-get") (param i64) (result i64 i64))
-    (func $p (import "http" "print") (param i64 i64))
+    (func $get (import "http" "http-get") (param i64) (result i32 i32))
+    (func $print (import "http" "print") (param i32 i32))
 
     (func (export "run") (param i64)
       local.get 0
-      call $g
-      call $p
+      call $get
+      call $print
     )
   )
 
@@ -136,7 +136,10 @@
 
   (func $run (param "a" u64)
     (canon lift
-      (core func $main "run"))
+      (core func $main "run")
+      (memory $libc "mem")
+      (realloc (func $libc "realloc"))
+    )
   )
   (export "run" (func $run))
 )
