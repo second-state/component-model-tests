@@ -31,6 +31,8 @@ WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-comp
 
 - [x] Let WasmEdge plugin produces component instance.
 - [ ] We are going to implement canonical ABI first, this will need data conversion which rely on `memory` and `reallocate` options in canonical lift/lowering.
+    - [x] rely on shared `memory`
+    - [ ] rely on `reallocate` function
 - [ ] implements resource
 - [ ] wasi preview2
 - [ ] Implement validation about types.
