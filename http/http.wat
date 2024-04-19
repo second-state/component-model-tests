@@ -94,7 +94,7 @@
   (core instance $libc (instantiate $Libc))
 
   (import "wasi:http/test" (instance $http
-    (export "http-get" (func (param "index" u64) (result string)))
+    (export "http-get" (func (param "uri" string) (result string)))
     (export "print" (func (param "text" string)))
   ))
 
@@ -112,11 +112,12 @@
   (core module $M
     (import "libc" "mem" (memory 1))
     (import "libc" "realloc" (func (param i32 i32 i32 i32) (result i32)))
-    (func $get (import "http" "http-get") (param i64) (result i32 i32))
+    (func $get (import "http" "http-get") (param i32 i32) (result i32 i32))
     (func $print (import "http" "print") (param i32 i32))
 
-    (func (export "run") (param i64)
+    (func (export "run") (param i32 i32)
       local.get 0
+      local.get 1
       call $get
       call $print
     )
@@ -134,7 +135,7 @@
     )
   )
 
-  (func $run (param "a" u64)
+  (func $run (param "uri" string)
     (canon lift
       (core func $main "run")
       (memory $libc "mem")
