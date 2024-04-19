@@ -23,16 +23,20 @@ WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-comp
 
 ## Limitation
 
-1. canonical ABI haven't get implemented
-2. plugin cannot export proper types yet
+1. canonical ABI haven't get fully implemented
+    - what we already have is supporting for type `string`, the rest higher type need to implement
+    - resource haven't get handled.
 2. The validation of component is incomplete, there is no guarantee your program with problems can be detected.
+    - we only do validation for nested module.
+    - new concepts in components not checked yet.
 
 ## Next step
 
 - [x] Let WasmEdge plugin produces component instance.
-- [ ] We are going to implement canonical ABI first, this will need data conversion which rely on `memory` and `reallocate` options in canonical lift/lowering.
+- [x] We are going to implement canonical ABI first, this will need data conversion which rely on `memory` and `reallocate` options in canonical lift/lowering.
     - [x] rely on shared `memory`
-    - [ ] rely on `reallocate` function
-- [ ] implements resource
+    - [x] rely on `reallocate` function
+- [ ] implements canonical resource
+- [ ] rest higher types `record`, `variants` etc.
 - [ ] wasi preview2
 - [ ] Implement validation about types.
