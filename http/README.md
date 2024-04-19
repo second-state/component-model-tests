@@ -110,7 +110,7 @@ Refers https://github.com/bytecodealliance/wasmtime/blob/main/crates/component-u
   (core instance $libc (instantiate $Libc))
 
   (import "wasi:http/test" (instance $http
-    (export "http-get" (func (param "index" u64) (result string)))
+    (export "http-get" (func (param "uri" string) (result string)))
     (export "print" (func (param "text" string)))
   ))
 
@@ -128,11 +128,12 @@ Refers https://github.com/bytecodealliance/wasmtime/blob/main/crates/component-u
   (core module $M
     (import "libc" "mem" (memory 1))
     (import "libc" "realloc" (func (param i32 i32 i32 i32) (result i32)))
-    (func $get (import "http" "http-get") (param i64) (result i32 i32))
+    (func $get (import "http" "http-get") (param i32 i32) (result i32 i32))
     (func $print (import "http" "print") (param i32 i32))
 
-    (func (export "run") (param i64)
+    (func (export "run") (param i32 i32)
       local.get 0
+      local.get 1
       call $get
       call $print
     )
@@ -150,7 +151,7 @@ Refers https://github.com/bytecodealliance/wasmtime/blob/main/crates/component-u
     )
   )
 
-  (func $run (param "a" u64)
+  (func $run (param "uri" string)
     (canon lift
       (core func $main "run")
       (memory $libc "mem")
@@ -170,6 +171,7 @@ The file defines a component, where have
 5. A core module `M`
 6. Instantiate the core module `M`, named instance `main`, with two lowering functions as immediate core instance
 7. Canonical lift a core function `run` from instance `main` to be a component function
+    - it's cool that we can use `string` here
 8. Export the component function
 
-When one executes the component (refers [docker](../docker#run-the-wasi-http-demo), result `run x` is do http get to URL index at `x`, and print the content.
+When one executes the component (refers [docker](../docker#run-the-wasi-http-demo), result `run uri` is do http get via URL `uri`, and print the content.
