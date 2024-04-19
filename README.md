@@ -18,7 +18,7 @@ ninja
 ./tools/wasmedge/wasmedge --enable-component /path/to/component-model-tests/core/core.wasm mdup 100
 
 WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-component \
-  /path/to/component-model-tests/http/http.wasm run 0
+  /path/to/component-model-tests/http/http.wasm run "https://google.com"
 ```
 
 ## Limitation
