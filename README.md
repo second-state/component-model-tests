@@ -37,6 +37,5 @@ WASMEDGE_PLUGIN_PATH=./plugins/wasi_http ./tools/wasmedge/wasmedge --enable-comp
     - [x] rely on shared `memory`
     - [x] rely on `reallocate` function
 - [ ] implements canonical resource
-- [ ] rest higher types `record`, `variants` etc.
 - [ ] wasi preview2
 - [ ] Implement validation about types.
