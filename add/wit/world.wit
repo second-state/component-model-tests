@@ -1,20 +1,6 @@
 package component:add;
 
-interface types {
-  enum operation {
-    add,
-    sub
-  }
-
-  resource engine {
-    constructor();
-    push-operand: func(operand: u32);
-    push-operation: func(operation: operation);
-    execute: func() -> u32;
-  }
-}
-
 /// An example world for the component to target.
-world calculator {
-    export types;
+world example {
+    export add: func(x: s32, y: s32) -> s32;
 }
